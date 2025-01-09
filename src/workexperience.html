@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../assets/css/index.css">
+        <link rel="stylesheet" href="../assets/css/workexperience.css">
+        <link rel="stylesheet" href="../assets/css/pages.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <title>Jessica's Personal Website</title>
+            
+        <script type="text/javascript" src="../assets/js/sparkles.js"></script>
+        <script type="text/javascript" src="../assets/js/animateUnderscore.js"></script>
+    </head>
+    <body>
+        <a href="../index.html" id="backButton">go back home</a>
+
+        <div class="mainContainer">
+            <div class="row">
+                <h3 class="headingText">> work experience<span id="underscore">_</span></h3>
+            </div>
+
+            <div id="resume">
+                <!-- filled by javascript below -->
+            </div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript" src="../assets/data/jobs.js"></script>
+<script>
+
+    init();
+
+    function init() {
+        // add all jobs to page
+        // jobs defined in assets/data/jobs.js
+        jobs.sort((a, b) => a.startYear < b.startYear).map((job) => {
+            document.getElementById("resume")
+                .innerHTML +=   createJobHTML(job);
+        });
+
+    }
+
+    // Given a year, filter resume to only show jobs of that year
+    function filterYear(year = 0) {
+        if (year === 0) {
+            jobs.map((job) => {
+                document.getElementById(job.id).style.display = "block";
+            })           
+        }
+        else {
+            const currentYear = new Date().getFullYear();
+
+            jobs.map((job) => {
+                var endYear = job.endYear == "Present" ? currentYear : job.endYear;
+
+                if (job.startYear <= year && endYear >= year) {
+                    document.getElementById(job.id).style.display = "block";
+                }
+                else {
+                    document.getElementById(job.id).style.display = "none";
+                }
+            })
+        }
+    }
+
+    // Given a job, returns the HTML of a single job in my resume
+    function createJobHTML(job) {
+        var responsibilitesHTML = ""
+        job.responsibilities.map((responsibility) => {
+            responsibilitesHTML += `<li>> ${responsibility}</li>`
+        })
+        /*const jobHTML = 
+        `<div id=${job.id}>
+            <h5>${job.title.toUpperCase()} @ <a href='${job.companyWebsite}' target='_blank'>${job.company.toUpperCase()}</a></h5>
+            ${job.startDate.toUpperCase()} - ${job.endDate.toUpperCase()}
+            <br/> ${job.location.toUpperCase()}
+            <br/><br/>
+            <ul style='padding-left:0px;'>
+                ${responsibilitesHTML.toLowerCase()}
+            </ul>
+        </div>`*/
+
+        const jobHTML = `
+        <div id=${job.id} class="row rowPadding">
+            <div class="col-md-5 alignRight">
+                    <h5 class="text-end">${job.title.toUpperCase()} @ <a href='${job.companyWebsite}' target='_blank'>${job.company.toUpperCase()}</a></h5>
+                    ${job.startDate.toUpperCase()} - ${job.endDate.toUpperCase()}
+                    <br/> ${job.location.toUpperCase()}
+            </div>
+            <div class="col-md-7">
+                <ul style='padding-left:0px;'>
+                ${responsibilitesHTML.toLowerCase()}
+            </ul>
+            </div>
+        </div>`
+        return jobHTML;
+    }
+
+</script>
