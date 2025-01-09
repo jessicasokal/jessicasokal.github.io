@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../assets/css/index.css">
+        <link rel="stylesheet" href="../assets/css/aboutme.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <title>Jessica's Personal Website</title>
+            
+        <script type="text/javascript" src="../assets/js/sparkles.js"></script>
+        <script type="text/javascript" src="../assets/js/animateUnderscore.js"></script>
+    </head>
+    <body>
+        <a href="../index.html">go back home</a>
+        <br/><br/>
+        <div class="row">
+            <div class="titleText col-md-6 alignRight">
+                <div class="row">
+                    <h3 class="headingText">> about me<span id="underscore">_</span></h3>
+                </div>
+                <p>
+                    hello! my name is jessica -- i'm a <span id="age"></span> year old post grad, currently living in boston, ma.
+                </p>
+                i'm into 
+                    <ul>
+                        <li>> coding</li>
+                        <li>> writing</li>
+                        <li>> animating</li>
+                        <li>> screenprinting</li>
+                        <li>> sewing</li>
+                        <li>> hiking</li>
+                    </ul> 
+                <p>
+                    i currently work full time as a web developer and design/alter/sell apparel in my spare time. 
+                </p>
+                <p><br/>here is a picture of me hiking! ----></p>
+            </div>
+            <div class="titleText col-md-6">
+                <img class="profilePhoto" src="../assets/images/jessica.jpg"/>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+<script>
+
+    const currentDate = new Date();
+    const myBirthday = Date.parse("03 Mar 2001 00:00:00 GMT");
+    var myAge = new Date(currentDate - myBirthday).getFullYear() - 1970;
+    document.getElementById("age").innerHTML += myAge;
+
+</script>
